@@ -1,0 +1,18 @@
+-- 1. Create the database
+CREATE DATABASE IF NOT EXISTS streamlit;
+USE streamlit;
+
+-- 2. Create the table
+CREATE TABLE IF NOT EXISTS mytable (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT
+);
+
+-- 3. Insert sample data
+INSERT INTO mytable (name, age) VALUES 
+('Alice Johnson', 28),
+('Bob Smith', 35),
+('Charlie Kim', 22),
+('Diana Patel', 41),
+('Ethan Green', 30);
