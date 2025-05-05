@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May  4 15:32:14 2025
+@author: Administrator
+"""
+
 import streamlit as st
 import streamlit_authenticator as stauth
 import pandas as pd
@@ -47,7 +53,11 @@ authenticator = stauth.Authenticate(
 name, auth_status, username = authenticator.login('Login', 'main')
 
 if auth_status:
-    st.success(f"Welcome *{name}*!")
+    st.sidebar.success(f"Welcome *{name}*!")
+
+    # Add logout button
+    authenticator.logout('Logout', 'sidebar')
+    st.sidebar.write("You are logged in.")
 
     # --------- DATABASE CONNECTION --------
     try:
@@ -74,14 +84,12 @@ if auth_status:
     
         if submitted:
             if name_input:
-                # Updated query without the email field
                 query = text(f"INSERT INTO {TABLE_NAME} (name, age) VALUES (:name, :age)")
                 connection.execute(query, {"name": name_input, "age": age_input})
                 connection.commit()
                 st.success("New entry added.")
             else:
                 st.warning("Please fill all fields.")
-
 
 elif auth_status is False:
     st.error("Invalid username or password.")
